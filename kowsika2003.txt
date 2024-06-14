@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Task Manager</title>
+<style>
+/* Add your CSS styling here */
+.completed {
+      text-decoration: line-through;
+}
+</style>
+</head>
+<body>
+<h1>Task Manager</h1>
+<input type="text" id="taskInput" placeholder="Add a new task">
+<button onclick="addTask()">Add Task</button>
+<ul id="taskList">
+  <!-- Tasks will be dynamically added here -->
+  </ul>
+
+  <script>
+  // JavaScript code for task management
+  document.addEventListener('DOMContentLoaded', function() {
+      loadTasks();
+  });
+
+  function loadTasks() {
+      let tasks = localStorage.getItem('tasks');
+        if (tasks) {
+                document.getElementById('taskList').innerHTML = tasks;
+                    // Add event listeners for marking as completed and editing tasks
+                        document.querySelectorAll('#taskList li').forEach(item => {
+                                  item.addEventListener('click', markAsCompleted);
+                                        item.addEventListener('dblclick', editTask);
+                        });
+        }
+  }
+
+  function addTask() {
+      let taskInput = document.getElementById('taskInput');
+        let taskText = taskInput.value.trim();
+          if (taskText !== '') {
+                let listItem = document.createElement('li');
+                    listItem.textContent = taskText;
+                        listItem.addEventListener('click', markAsCompleted);
+                            listItem.addEventListener('dblclick', editTask);
+                                document.getElementById('taskList').appendChild(listItem);
+                                    taskInput.value = '';
+                                        saveTasks();
+          }
+  }
+
+  function markAsCompleted() {
+      this.classList.toggle('completed');
+        saveTasks();
+  }
+
+  function editTask() {
+      let newText = prompt('Edit the task:', this.textContent);
+        if (newText !== null) {
+                this.textContent = newText.trim();
+                    saveTasks();
+        }
+  }
+
+  function saveTasks() {
+      localStorage.setItem('tasks', document.getElementById('taskList').innerHTML);
+  }
+
+  function removeTasks() {
+      localStorage.removeItem('tasks');
+        document.getElementById('taskList').innerHTML = '';
+  }
+  </script>
+  </body>
+  </html>
+  }
+  }
+        }
+  }
+  }
+          }
+  }
+                        })
+        }
+  }
+  })
+}
